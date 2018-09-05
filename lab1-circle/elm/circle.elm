@@ -2,6 +2,7 @@
   To execute this program, paste the content of this file
   to http://elm-lang.org/try and press "compile".
 -}
+import Browser
 import Html exposing (..)
 import Html.Attributes as A exposing (..)
 import Html.Events exposing (onInput)
@@ -10,7 +11,7 @@ import List
 
 
 main =
-  beginnerProgram { model = initModel, view = view, update = update }
+  Browser.sandbox { init = initModel, view = view, update = update }
 
 initModel : Int
 initModel = 15
@@ -22,8 +23,8 @@ view model =
   div []
     [
       slider { makeMsg = identity, minValue = 1, maxValue = 20, model = model }
-    , text ("size = " ++ toString model)
-    , tableFromLines (circleLines model) model
+    , text ("size = " ++ String.fromInt model)
+    , tableFromLines (circleLines model)
     ]
 
 circleLines : Int -> List (List String)
@@ -40,38 +41,37 @@ shouldShow size i j = shouldShowS size i j
 
 shouldShowS s i j = abs (i^2 + j^2 - s^2) <= s+1
 
-tableFromLines lines model =
+tableFromLines lines =
   let
-    lines = circleLines model
     rows = List.map row lines
     row line = tr [] (List.map cell line)
-    cell content = td [style cellStyle] [text content]
+    cell content = td cellStyle [text content]
   in
-  table [style tableStyle] rows
+  table tableStyle rows
 
 slider { makeMsg, minValue, maxValue, model } =
   div []
-    [ text <| toString minValue
+    [ text <| String.fromInt minValue
     , input
       [ type_ "range"
-      , A.min <| toString minValue
-      , A.max <| toString maxValue
-      , value <| toString model
-      , onInput (makeMsg << Result.withDefault 0 << String.toInt)
+      , A.min <| String.fromInt minValue
+      , A.max <| String.fromInt maxValue
+      , value <| String.fromInt model
+      , onInput (makeMsg << Maybe.withDefault 0 << String.toInt)
       ] []
-    , text <| toString maxValue
+    , text <| String.fromInt maxValue
     ]
 
 
 {-- styling --}
 
 tableStyle =
-    [ ("border","2px solid black")
+    [  style "border" "2px solid black"
     ]
 
 cellStyle =
-  [ ("border", "0px solid grey")
-   ,("width", "10px")
-   ,("height", "20px")
-   ,("text-align", "center")
+  [ style "border" "0px solid grey"
+   , style "width" "10px"
+   , style "height" "20px"
+   , style "text-align" "center"
   ]
