@@ -34,7 +34,7 @@ int main(char** argv, int argc)
 {
     int n = getElement();
 
-    if ( (1 - (n == 1)) * (n) )
+    if ( (n >= 1) * (n < 10) + (n == 0) )
     {
         printf("A\n");
     }

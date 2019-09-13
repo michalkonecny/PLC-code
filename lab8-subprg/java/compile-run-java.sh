@@ -1,1 +1,1 @@
-../../scripts/compile-run-java.sh
+../../../compile-run-java.sh

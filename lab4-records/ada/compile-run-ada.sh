@@ -1,1 +1,1 @@
-../../scripts/compile-run-ada.sh
+../../../compile-run-ada.sh

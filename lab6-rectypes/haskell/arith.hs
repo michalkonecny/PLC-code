@@ -1,90 +1,73 @@
 module Main where
 
 -- define a type of arithmetic expression trees:
-data Expression -- type name Expression defined
-    = MaxExp -- constructor for a tree node, variant one
+data ArithExp -- type name ArithExp defined
+    = ArithExpBinary -- constructor for a tree node, variant one
       {
-        expMaxLeft :: Expression, -- component name :: component type
-        expMaxRight :: Expression
+        ae_Op :: BinaryOp, -- component name :: component type
+        ae_Left :: ArithExp,
+        ae_Right :: ArithExp
       }
-    | MinExp -- constructor for a tree node, variant two
+    | ArithExpInt -- constructor for a tree node, variant two
       {
-        expMinLeft :: Expression, -- component name :: component type
-        expMinRight :: Expression
+        ae_Int :: Integer
       }
-    | IntExp -- constructor for a tree node, variant three
+    | ArithExpDouble -- constructor for a tree node, variant two
       {
-        expInt :: Integer
+        ae_Double :: Double
       }
     deriving (Eq)
 
+data BinaryOp = BinaryTimes | BinaryPlus | BinaryPower
+    deriving (Eq)
+    
 -- how to print these expressions:
-instance (Show Expression) where
-    show (IntExp n) = show n
-    show (MaxExp left right) =
-        "max(" ++ show left ++ "," ++ show right ++ ")"
-    show (MinExp left right) =
-        "min(" ++ show left ++ "," ++ show right ++ ")"
+instance (Show ArithExp) where
+    show (ArithExpBinary op left right) =
+        "(" ++ show left ++ " " ++ show op ++ " " ++ show right ++ ")"
+    show (ArithExpInt n) = show n
+    show (ArithExpDouble d) = show d
 
-countNodes :: Expression -> Int
+instance (Show BinaryOp) where
+    show BinaryTimes = "*"
+    show BinaryPlus = "+"
+    show BinaryPower = "^"
+
+countNodes :: ArithExp -> Int
     -- the above declares the type of the function
-    -- (parameter of type Expression, result of type Int)
-countNodes (IntExp _) = 1
-countNodes (MaxExp subExpLeft subExpRight) =
+    -- (parameter of type ArithExp, result of type Int)
+countNodes (ArithExpInt _) = 1
+countNodes (ArithExpDouble _) = 1
+countNodes (ArithExpBinary _ subExpLeft subExpRight) =
     1 + (countNodes subExpLeft) + (countNodes subExpRight)
-countNodes (MinExp subExpLeft subExpRight) =
-    1 + (countNodes subExpLeft) + (countNodes subExpRight)
 
--- makeMax takes a list of expressions and returns an
--- expression for calculating the maximum of the expressions in the list:
---   eg: makeMax [`min(1,2)',`3',`4'] returns the tree
---         `max(min(1,2),max(3,4))'
---    (using the Prolog syntax for the expressions)
-makeMax :: [Expression] -> Expression
-makeMax [expr] = expr
-makeMax (firstExpr : remainingExprs) =
-    -- make new MAX node connecting the first expression and
-    -- the result of processing the remaining expressions:
-    MaxExp firstExpr (makeMax remainingExprs)
--- no definition for makeMax [] -- such call will cause runtime error
+-- function to increment all numbers in an expression by 1:
+incrAllNumbers :: ArithExp -> ArithExp
+incrAllNumbers (ArithExpInt n) = 
+    ArithExpInt (n + 1)
+incrAllNumbers (ArithExpDouble d) = 
+    ArithExpDouble (d + 1)
+incrAllNumbers (ArithExpBinary op l r) = 
+    ArithExpBinary op (incrAllNumbers l) (incrAllNumbers r)
 
--- evaluate the expression and return the result:
-getValue :: Expression -> Integer
-getValue (IntExp n) = n
-getValue (MaxExp subExpLeft subExpRight) =
-    max (getValue subExpLeft) (getValue subExpRight)
-getValue (MinExp subExpLeft subExpRight) =
-    min (getValue subExpLeft) (getValue subExpRight)
-
-flipMinMax :: Expression -> Expression
-flipMinMax (IntExp n) = IntExp n
-flipMinMax (MaxExp subExpLeft subExpRight) =
-    MinExp
-        (flipMinMax subExpLeft)
-        (flipMinMax subExpRight)
-flipMinMax (MinExp subExpLeft subExpRight) =
-    MaxExp
-        (flipMinMax subExpLeft)
-        (flipMinMax subExpRight)
-
--- exp1 = min(1,max(2,3)):
-exp1 :: Expression
+-- exp1 = 2 * (3 + 0.5):
 exp1 =
-    MinExp
-        (IntExp 1)
-        (MaxExp
-            (IntExp 2)
-            (IntExp 3))
+    ArithExpBinary BinaryTimes
+        (ArithExpInt 2)
+        (ArithExpBinary BinaryPlus
+            (ArithExpInt 3)
+            (ArithExpDouble 0.5))
 
-exp2 :: Expression
-exp2 = makeMax [flipMinMax exp1, flipMinMax exp1]
+-- exp2 = exp1 ^ exp1
+exp2 =
+    ArithExpBinary BinaryPower exp1 exp1
 
 main =
     do
     printExpInfo "exp1" exp1
-    printExpInfo "exp1 flipped" (flipMinMax exp1)
+    printExpInfo "exp1 all numbers incremented" (incrAllNumbers exp1)
     printExpInfo "exp2" exp2
-    printExpInfo "exp2 flipped" (flipMinMax exp2)
+    printExpInfo "exp2 all numbers incremented" (incrAllNumbers exp2)
     where
     printExpInfo exprName expr =
         do
@@ -93,6 +76,39 @@ main =
                     ++ (show $ expr)
         putStrLn $ "countNodes (" ++ exprName ++ ") = "
                     ++ (show $ countNodes expr)
-        putStrLn $ "getValue (" ++ exprName ++ ") = "
-                    ++ (show $ getValue expr)
+--         putStrLn $ "checkArithExp (" ++ exprName ++ ") = "
+--                     ++ (show $ checkArithExp expr)
         putStrLn "--------"
+    
+-- OPTIONAL PART:
+    
+-- auxiliary enumerated type:
+data ArithExpNumberType = ENT_INT | ENT_DOUBLE
+
+-- function to check whether all exponents are integers:
+checkArithExp :: ArithExp -> Bool
+checkArithExp expression =
+    -- return the first component, discard the other:
+    fst (checkArithExpGiveType expression)
+    where
+    -- auxiliary function that checks expression and at the same
+    -- time works out whether its value is an integer or a float
+    checkArithExpGiveType :: ArithExp -> (Bool, ArithExpNumberType)
+    checkArithExpGiveType (ArithExpInt _) = (True, ENT_INT)
+    checkArithExpGiveType (ArithExpDouble _) = (True, ENT_DOUBLE)
+    checkArithExpGiveType (ArithExpBinary BinaryPower base exponent) =
+        (baseOK && expOK && isInt expType, baseType)
+        where
+        (baseOK, baseType) = checkArithExpGiveType base
+        (expOK, expType) = checkArithExpGiveType exponent
+        isInt ENT_INT = True
+        isInt _ = False
+    checkArithExpGiveType (ArithExpBinary _ l r) =
+        undefined -- OPTIONAL TASK: COMPLETE THIS LINE
+        where
+        (lOK, lType) = checkArithExpGiveType l
+        (rOK, rType) = checkArithExpGiveType r
+        combineTypes ENT_INT ENT_INT = ENT_INT
+        combineTypes _ _ = ENT_DOUBLE
+        -- only if both are integers, the result is an integer
+

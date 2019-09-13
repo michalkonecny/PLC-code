@@ -1,1 +1,1 @@
-../../scripts/compile-run-c.sh
+../../../compile-run-c.sh
