@@ -1,1 +1,1 @@
-../../../compile-run-cpp.sh
+../../scripts/compile-run-cpp.sh
