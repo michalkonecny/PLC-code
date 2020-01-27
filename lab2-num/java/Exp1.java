@@ -62,7 +62,7 @@ public class Exp1
     private static float exp1(float a, float b)
     {
         float result =
-            a + b * (- a + 1/b);
+            (a+1)/a+b+a+b;
         return result;
     }
   

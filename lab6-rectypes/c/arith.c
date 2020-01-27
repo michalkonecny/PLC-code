@@ -1,33 +1,30 @@
 #include <stdio.h>
 #include <malloc.h>
 
-// leaf node structures:
+// leaf node structure:
 typedef struct { int value; } ArithExpInt;
-typedef struct { double value; } ArithExpDouble;
 
-// An enumerated type for indicating in each binary
-// node which operator the node represents.
-typedef enum { TIMES, PLUS, POWER } BinaryOperator;
+// operator node structure:
+typedef enum {MIN, MAX} MinMaxOperator;
 
 typedef struct
 { 
-    BinaryOperator op;
+    MinMaxOperator op;
     struct ARITHEXP * subExprLeft;
     struct ARITHEXP * subExprRight;
       // incomplete struct, completion below
       // (struct ARITHEXP = ArithExp)
 }
-ArithExpBinary; // the name of the new record type
+ArithExpMinMax; // the name of the new record type
 
 typedef union
 {
-    ArithExpBinary binExpr; // either this (an operator + 2 children)
-    ArithExpInt intExpr; // or this (an integer)
-    ArithExpDouble dblExpr; // or this (a floating-point number)
+    ArithExpMinMax opExpr; // either this (an operator + 2 children)
+    ArithExpInt intExpr; // or this (a number)
 }
 ArithExpUnion; // the name of the new union type
 
-typedef enum { INTEXPR, DOUBLEEXPR, BINARYEXPR } ArithExpRepr; // discriminant values
+typedef enum {INTEXPR, OPEXPR} ArithExpRepr;
 
 typedef struct ARITHEXP
    // struct named ARITHEXP to complete the struct on lines 13,14
@@ -47,96 +44,84 @@ ArithExp * newInt(int value)
     return result;
 }
 
-ArithExp * newDouble(double value)
+ArithExp * newMinMax(MinMaxOperator op, ArithExp * subExprLeft, ArithExp * subExprRight)
 {
     ArithExp * result =
         (ArithExp *)malloc(sizeof(ArithExp));
-    (* result).repr = DOUBLEEXPR; // indicate discriminant
-    (* result).content.dblExpr.value = value; // initialise content
-    return result;
-}
-
-ArithExp * newBinaryOp(BinaryOperator op, ArithExp * subExpLeft, ArithExp * subExpRight)
-{
-    ArithExp * result =
-        (ArithExp *)malloc(sizeof(ArithExp));
-    (* result).repr = BINARYEXPR; // indicate discriminant
-    // initialise the content using the .expBinOp "view" of the space:
-    ArithExpBinary content =  { op, subExpLeft, subExpRight };
-    (* result).content.binExpr = content; // copying the whole record
+    (* result).repr = OPEXPR; // indicate discriminant
+    // initialise the content using the opExpr "view" of the space:
+    ArithExpUnion content = { op, subExprLeft, subExprRight };
+    // TASK 6.2.(d): add code completing the initialisation
 
     return result;
 }
 
-
-ArithExp * newPlus(ArithExp * subExpLeft, ArithExp * subExpRight)
+ArithExp * newMin(ArithExp * subExprLeft, ArithExp * subExprRight)
 {
-    return newBinaryOp(PLUS, subExpLeft, subExpRight);
+    return newMinMax(MIN, subExprLeft, subExprRight);
 }
 
-ArithExp * newTimes(ArithExp * subExpLeft, ArithExp * subExpRight)
+ArithExp * newMax(ArithExp * subExprLeft, ArithExp * subExprRight)
 {
-    return newBinaryOp(TIMES, subExpLeft, subExpRight);
-}
-
-ArithExp * newPower(ArithExp * subExpLeft, ArithExp * subExpRight)
-{
-    return newBinaryOp(POWER, subExpLeft, subExpRight);
+    return newMinMax(MAX, subExprLeft, subExprRight);
 }
 
 int countNodes(ArithExp * expr)
 {
     int result = 1;
 
-    if ( (*expr).repr == BINARYEXPR )
+    if ( (*expr).repr == OPEXPR )
     {
-        /* TASK 6.2(c) (Q5) */
-
-
+        result = result + countNodes((*expr).content.opExpr.subExprLeft);
+        result = result + countNodes((*expr).content.opExpr.subExprRight);
     }
 
     return result;
 }
 
-void incrementAllNumbers(ArithExp * expr)
+int evaluate(ArithExp * expr)
 {
-    // investigate the type of node:
+    int result;
+
+    if ( (*expr).repr == OPEXPR )
+    {
+        int leftValue =
+            evaluate((*expr).content.opExpr.subExprLeft);
+
+        int rightValue =
+            evaluate((*expr).content.opExpr.subExprRight);
+
+        if ( (*expr).content.opExpr.op == MAX )
+        {
+            result = leftValue > rightValue ? leftValue : rightValue;
+        }
+
+        if ( (*expr).content.opExpr.op == MIN )
+        {
+            result = leftValue > rightValue ? rightValue : leftValue;
+        }
+    }
+
     if ( (*expr).repr == INTEXPR )
     {
-        // it is an integer, so increment it:
-        (*expr).content.intExpr.value ++;
+        result = (*expr).content.intExpr.value;
     }
 
-    if ( (*expr).repr == DOUBLEEXPR )
-    {
-        // it is a floating point number, so increment it:
-        (*expr).content.dblExpr.value =
-            (*expr).content.dblExpr.value + 1.0;
-    }
-
-    if ( (*expr).repr == BINARYEXPR )
-    {
-        // it is a binaru operator, so recurse to both operands:
-        incrementAllNumbers((*expr).content.binExpr.subExprLeft);
-        incrementAllNumbers((*expr).content.binExpr.subExprRight);
-    }
+    return result;
 }
 
 int main(char** argv, int argc)
 {
-    // construct the expression 2 * (3 + 0.5):
-    ArithExp * exp1 = newTimes(newInt(2), newPlus(newInt(3), newDouble(0.5)));
+    // construct the expression min(1, max(2, 3)):
+    ArithExp * exp1 = newMin(newInt(1), newMax(newInt(2), newInt(3)));
 
-    // construct the expression exp1 ^ exp1:
-    ArithExp * exp2 = newPower(exp1, exp1);
-
-    incrementAllNumbers(exp1);
-    incrementAllNumbers(exp2);
-    
     // test the countNodes function:
-    printf("countNodes(exp1) = %d\n", countNodes(exp1));
-    printf("countNodes(exp2) = %d\n", countNodes(exp2));
+    int nodesN = countNodes(exp1);
+    printf("countNodes(exp1) = %d\n", nodesN);
 
+    // test the evaluate function:
+    int value = evaluate(exp1);
+    printf("evaluate(exp1) = %d\n", value);
+    
     return 0;
 }
-

@@ -14,15 +14,14 @@ class ArithExpInt extends ArithExp
         return 1;
     }
 
-    public double getValue()
+    public int getValue()
     {
         return value;
     }
 
-    public void incrementAllNumbers()
-    {
-        value ++;
-    }
+    public void flipMinMax()
+    { ; }
+    // no need to flip anything in this case
 
     public String toString()
     {

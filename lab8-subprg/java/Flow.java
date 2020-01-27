@@ -12,24 +12,35 @@ public class Flow
     //
     //      adjustDistance is a method inside this
     //      class so that parameter passing is simpler
-    private static class FlowPair
+    private static class TwoFlows
     {
-        public float a = 0;
-        public float b = 0;
-        
-        public FlowPair(float a, float b)
+        public float flow1;
+        public float flow2;
+
+        public TwoFlows(float flow1, float flow2)
         {
-            this.a = a;
-            this.b = b;
+            this.flow1 = flow1;
+            this.flow2 = flow2;
         }
-        
-        public void adjustDistribution()
+
+        //      This method adjustDistance behaves like
+        //      the procedure AdjustDistance in flow.adb.
+        public void adjustDistance()
         {
-            if ( Math.abs(a - b) < 5 )
+            if ( Math.abs(flow1 - flow2) < 5 )
             {
-                float average = (a + b)/2;
-                a = average + 10 * (a - average) - 1;
-                b = average + 10 * (b - average) + 1;
+                if(flow1 > flow2)
+                {
+                    flow2 = flow2 / 3;
+                    flow1 = flow1 + flow2;
+                    flow1 = flow1 + flow2;
+                }
+                else
+                {
+                    flow1 = flow1 / 3;
+                    flow2 = flow2 + flow1;
+                    flow2 = flow2 + flow1;
+                }
             }
         }
     }
@@ -37,13 +48,13 @@ public class Flow
     public static void main(String[] args)
     {
         float f1, f2, f3;
-        f1 = 0; f2 = 0; f3 = 1;
+        f1 = 3; f2 = 3; f3 = 3;
         
         System.out.println(formatF1F2F3(f1,f2,f3));
         
         // 8.3.(c) TASK:
         //    Write code that is analogous to
-        //    lines 34-39 in flow.cpp except
+        //    lines 50-55 in flow.cpp except
         //    that it simulates *copy-in copy-out* passing
         //    of parameters f1 and f2 to method adjustDistance.
     }

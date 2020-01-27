@@ -55,12 +55,12 @@
 (let*
     ((n (get-positive-integer "n"))
      (m (get-positive-integer "m"))
-     (taskVarDescr "task (1=floating-point n^m; 2=integer n^m; 3=floating-point 1+1/n+1/n^2+...+1/n^m; 4=rational 1+1/n+1/n^2+...+1/n^m)")
+     (taskVarDescr "task (1=floating-point n^m; 2=integer n^m; 3=floating-point 1+1/n+1/n^2+...+1/n^m)")
      (task (get-positive-integer taskVarDescr))
      (result
         (case task
         (1 (reverse (powers-fp n m)))
         (2 (reverse (powers n m)))
         (3 (reverse (geom-fp n m)))
-        (4 (reverse (geom n m))))))
+        (4 (reverse (geom-fp n m))))))
     (write result))

@@ -14,22 +14,27 @@ is
     begin
         return abs(Flow1 - Flow2);
     end Distance;
-    
-    -- AdjustDistribution attempts to change the values
+
+    -- AdjustDistance attempts to change the values
     -- of the parameters if they are quite close together
     -- so that they are more apart.
     -- Nevertheless, the sum of the values stays the same.
-    procedure AdjustDistribution
+    procedure AdjustDistance
         (Flow1 : in out Float; Flow2 : in out Float) 
     is
-        Average : Float;
     begin
-        if Distance(Flow1, Flow2) < 5.0 then
-            Average := (Flow1 + Flow2)/2.0;
-            Flow1 := Average + 10.0 * (Flow1 - Average) - 1.0;
-            Flow2 := Average + 10.0 * (Flow2 - Average) + 1.0;
+        if Distance(Flow1,Flow2) < 10.0 then
+            if Flow1 > Flow2 then
+                Flow2 := Flow2 / 3.0;
+                Flow1 := Flow1 + Flow2;
+                Flow1 := Flow1 + Flow2;
+            else
+                Flow1 := Flow1 / 3.0;
+                Flow2 := Flow2 + Flow1;
+                Flow2 := Flow2 + Flow1;
+            end if;
         end if;
-    end AdjustDistribution;
+    end AdjustDistance;
     
 begin
     declare
@@ -38,25 +43,26 @@ begin
         procedure Put_F1F2F3 is
         begin
             Put("F1 = ");
-            Put(F1,0,0,0);
+            Put(F1,0,2,0);
             Put("; F2 = ");
-            Put(F2,0,0,0);
+            Put(F2,0,2,0);
             Put("; F3 = ");
-            Put(F3,0,0,0);
+            Put(F3,0,2,0);
             Put_Line("");
         end Put_F1F2F3;
         
     begin
-        F1 := 0.0;
-        F2 := 0.0;
-        F3 := 1.0;
+        F1 := 3.0;
+        F2 := 3.0;
+        F3 := 3.0;
         
+        -- test the AdjustDistance procedure:
         Put_F1F2F3;
-        AdjustDistribution(F1, F2);
+        AdjustDistance(F1, F2);
         Put_F1F2F3;
-        AdjustDistribution(F2, F3);
+        AdjustDistance(F2, F3);
         Put_F1F2F3;
-        AdjustDistribution(F2, F2);  -- this looks bad...what actually happens?
+        AdjustDistance(F3, F3); -- this looks bad...what actually happens?
         Put_F1F2F3;
     end;
 end Flow;

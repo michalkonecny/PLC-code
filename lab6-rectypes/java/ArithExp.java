@@ -4,7 +4,7 @@
  * the whole expression that it defines together with
  * its children and (grand-)...children.
  *
- * Classes ArithExpBinary and ArithExpInt extend ArithExp.
+ * Classes ArithExpMinMax and ArithExpInt extend ArithExp.
  */
 abstract class ArithExp
 {
@@ -20,12 +20,12 @@ abstract class ArithExp
      *
      * @return the number that the expression represents
      */
-    public abstract double getValue();
+    public abstract int getValue();
 
     /**
-     * Go through all nodes in the expression tree
-     * and increment each number by 1.
+     * go through all nodes in the expression tree
+     * and change each min to max and vice versa
      */
-    public abstract void incrementAllNumbers();
+    public abstract void flipMinMax();
 
 }
