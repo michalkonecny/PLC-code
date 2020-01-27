@@ -1,1 +1,0 @@
-../../scripts/compile-run-c.sh
