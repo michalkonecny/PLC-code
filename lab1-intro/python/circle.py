@@ -17,9 +17,10 @@ class Circle:
         return shouldPaintS(self.size,i,jj/2)
 
 def main():
-    size = int(sys.argv[1])
+    # size = int(sys.argv[1])
+    size = 15
     c = Circle(size)
     for i in range(1,size+1):
-        print c.circleLine(i)
+        print(c.circleLine(i))
 
 main() # interpreter, now that you know what main is, execute it!

@@ -12,7 +12,8 @@ procedure Circle is
   procedure SetSize is
     last : Integer;
   begin
-    Get(Argument(1),size,last);
+    size := 15;
+    -- Get(Argument(1),size,last);
   end SetSize;
 
   function ShouldPaint(i,jj : Integer) return Boolean;

@@ -1,7 +1,7 @@
 class Circle {
 
   public static void main(String[] args) {
-    int size = Integer.parseInt(args[0]);
+    int size = 15; // Integer.parseInt(args[0]);
     Circle c = new Circle(size);
     for (int i = 1; i <= size; i++ ) {
       System.out.println(c.circleLine(i));

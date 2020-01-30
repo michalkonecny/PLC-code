@@ -33,4 +33,6 @@
 
 ;; All the above code "teaches" the lisp interpreter new functions.
 ;; The following line has a direct effect:
-(write-lines (circleLines (parse-integer (first *args*))))
+(write-lines (circleLines 
+  15))
+  ;; (parse-integer (first *args*))))

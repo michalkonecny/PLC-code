@@ -5,7 +5,8 @@ import System.Environment (getArgs)
 
 main =
   do
-  [sizeS] <- getArgs
+  -- [sizeS] <- getArgs
+  let sizeS = "15"
   sequence_ (map putStrLn (circleLines (read sizeS)))
 
 circleLines :: Integer -> [String]
