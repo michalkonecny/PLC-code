@@ -1,0 +1,19 @@
+name:                intro
+version:             0.1.0.0
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable lab1-haskell-intro
+  hs-source-dirs:      .
+  main-is:             intro.hs
+  build-depends:       base
+
+executable lab1-haskell-tasks
+  hs-source-dirs:      .
+  main-is:             tasks.hs
+  build-depends:       base
+
+executable lab1-haskell-circle
+  hs-source-dirs:      .
+  main-is:             Circle.hs
+  build-depends:       base
