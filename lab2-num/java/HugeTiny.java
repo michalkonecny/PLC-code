@@ -1,4 +1,4 @@
-public class Sqpolyroot 
+public class HugeTiny 
 {
 
     public static void main(String[] args)
