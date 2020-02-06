@@ -1,9 +1,9 @@
 module Main where
 
--- from package aern-mpfr:
-import qualified Numeric.AERN.MPFRBasis.Interval as MI
+-- from package aern2-mp:
+import AERN2.MP
 
-type MI = MI.MI
+type MI = MPBall
 
 main = 
     do
@@ -14,18 +14,15 @@ usePrec prec =
     putStr $ show prec
     putStr ": "
     putStr $ show resultInterval
-    putStr " width = "
-    putStr $ show resultWidth
     putStrLn ""
     where
     resultInterval = sum_fracts prec 1000
-    resultWidth = MI.width resultInterval
 
-sum_fracts :: MI.Precision -> Int -> MI
+sum_fracts :: Precision -> Int -> MI
 sum_fracts p n -- = 1/1 + 1/2 + ... + 1/n
-    | (n == 0) = oneM
-    | otherwise = (oneM/nM) + sum_fracts p (n - 1)
+    | (n == 0) = oneI
+    | otherwise = (oneI/nI) + sum_fracts p (n - 1)
     where
-    oneM = MI.fromDouble p 1
-    nM = MI.fromDouble p (fromIntegral n)
+    oneI = setPrecision p (mpBall (1::Integer))
+    nI = setPrecision p (mpBall n)
     
