@@ -33,7 +33,7 @@
     ; and return the first element of the first matching pair (ie os name)
 
 (defun get-os ()
-    (write-string "input OS: ")
+    (write-string (format nil "input OS: ~%"))
     (let*
         ((line (read-line)) ;get a line as a string
          (element (read-from-string line))) ;parse the line
