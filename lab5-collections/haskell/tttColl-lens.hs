@@ -11,6 +11,9 @@ import qualified Data.List as List
 --    > sudo apt-get install libghc-lens-dev
 -- or, if you have the package cabal-install installed:
 --    > cabal install lens
+-- or, if you have the package haskell-stack installed:
+--    > stack install
+-- will take care of installing all dependencies, including lens.
 import Control.Lens (makeLenses, set, element, (&))
 
 data Player 

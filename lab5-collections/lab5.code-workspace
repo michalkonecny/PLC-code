@@ -1,0 +1,14 @@
+{
+	"folders": [
+    {
+      "path": "java"
+    },
+    {
+      "path": "python"
+    },
+    {
+      "path": "haskell"
+    }
+	],
+	"settings": {}
+}

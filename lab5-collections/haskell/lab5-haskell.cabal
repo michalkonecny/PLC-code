@@ -1,0 +1,20 @@
+name:                lab5-haskell
+version:             0.1.0.0
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable lab5-haskell-accomColl
+  hs-source-dirs:      .
+  main-is:             accomColl.hs
+  build-depends:       base, containers, pretty
+
+executable lab5-haskell-tttColl
+  hs-source-dirs:      .
+  main-is:             tttColl.hs
+  build-depends:       base, containers
+
+executable lab5-haskell-tttColl-lens
+  hs-source-dirs:      .
+  main-is:             tttColl-lens.hs
+  build-depends:       base, containers, lens
+
