@@ -3,22 +3,22 @@ version:             0.1.0.0
 build-type:          Simple
 cabal-version:       >=1.10
 
-executable lab3-haskell-accom
+executable lab4-haskell-accom
   hs-source-dirs:      .
   main-is:             accom.hs
   build-depends:       base
 
-executable lab2-haskell-recordtest
+executable lab4-haskell-recordtest
   hs-source-dirs:      .
   main-is:             recordtest.hs
   build-depends:       base
 
-executable lab2-haskell-uniontest
+executable lab4-haskell-uniontest
   hs-source-dirs:      .
   main-is:             uniontest.hs
   build-depends:       base
 
-executable lab2-haskell-tupletest
+executable lab4-haskell-tupletest
   hs-source-dirs:      .
   main-is:             tupletest.hs
   build-depends:       base
