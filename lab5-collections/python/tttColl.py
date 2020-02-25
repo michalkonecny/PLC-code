@@ -66,42 +66,42 @@ move = Move("X",[0,0])
 
 # print all elements from the list
 for event in events:
-    print event
+    print(event)
 
 # empty line
-print
+print()
 
 # search for an element of class Pause and print it
 for event in events:
     if event.__class__ == Pause:
-        print event
+        print(event)
         break # stop the for loop
 
 # empty line
-print
+print()
 
 # compute players
 players = [event.player for event in events]
 
 for player in players:
-    print player
+    print(player)
 
 # empty line
-print
+print()
 
 # remove all pauses
 events2 = \
     [event for event in events if event.__class__ != Pause]
     
 for event in events2:
-    print event
+    print(event)
 
 # non-blank fields from a board:
 nonBlankFields = [cell for row in board1.rows for cell in row if cell != "B"]
-print "nonBlankFields = ", nonBlankFields
+print("nonBlankFields = ", nonBlankFields)
 
 # heterogeneous dictionary:
 board2score = { board1 : 2.0, board2 : "dunno" }
 board2score[ board2 ] = 0.0 # like array update
-print board2score[ board1 ] # like array lookup
+print(board2score[ board1 ]) # like array lookup
 

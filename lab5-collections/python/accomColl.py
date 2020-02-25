@@ -110,9 +110,9 @@ things = [111, myHouse1, [1,2], myHouse2, "a string", myFlat1, myFlat2]
 allAccommodation = \
     [] #TASK 5.3.(c)  -- replace [] by a list comprehension
 
-print "All accommodation:"
+print("All accommodation:")
 for accom in allAccommodation:
-    print " ", accom
+    print(" ", accom)
 
 # empty line
 print
@@ -120,9 +120,9 @@ print
 # extract streets
 streets = \
     [accom.street for accom in allAccommodation]
-print "Accommodation streets:"
+print("Accommodation streets:")
 for street in streets:
-    print " ", street
+    print(" ", street)
 
 # empty line
 print
@@ -134,17 +134,17 @@ flats = \
 houseFloorsSequence = \
     [] # TASK 5.3.(b)  -- replace [] by a list comprehension
 
-print "Floor counts for houses: "
+print("Floor counts for houses: ")
 for houseFloors in houseFloorsSequence:
-    print " ",houseFloors
+    print(" ",houseFloors)
 
 # empty line
 print
 
 # heterogeneous dictionary:
 accommodation2score = { myHouse1 : 2.0, myFlat1 : "dunno" }
-print accommodation2score
-print "myHouse1 score: ", accommodation2score[ myHouse1 ] # like array lookup
+print(accommodation2score)
+print("myHouse1 score: ", accommodation2score[ myHouse1 ]) # like array lookup
 
 accommodation2score [ myHouse1 ] = 2.5 # like array update
-print accommodation2score
+print(accommodation2score)
