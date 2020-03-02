@@ -1,0 +1,10 @@
+name:                lab6-haskell
+version:             0.1.0.0
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable lab6-haskell-arith
+  hs-source-dirs:      .
+  main-is:             arith.hs
+  build-depends:       base
+
