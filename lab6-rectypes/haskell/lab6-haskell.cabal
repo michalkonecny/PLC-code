@@ -8,3 +8,18 @@ executable lab6-haskell-arith
   main-is:             arith.hs
   build-depends:       base
 
+executable lab6-haskell-table
+  hs-source-dirs:      .
+  main-is:             table.hs
+  build-depends:       base
+
+executable lab6-haskell-table-seq
+  hs-source-dirs:      .
+  main-is:             table-seq.hs
+  build-depends:       base, containers
+
+executable lab6-haskell-table-lenses
+  hs-source-dirs:      .
+  main-is:             table-lenses.hs
+  build-depends:       base, lens
+

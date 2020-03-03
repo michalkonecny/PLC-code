@@ -1,6 +1,9 @@
 {
 	"folders": [
     {
+      "path": "html"
+    },
+    {
       "path": "java"
     },
     {
@@ -8,6 +11,9 @@
     },
     {
       "path": "haskell"
+    },
+    {
+      "path": "lisp"
     },
     {
       "path": "prolog"
