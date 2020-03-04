@@ -30,8 +30,8 @@ class ArithExpMinMax extends ArithExp
             case MIN: op = MinMaxOperator.MAX; break;
             case MAX: op = MinMaxOperator.MIN; break;
         }
-        // flip also sub-expressions:
-        // TASK 6.2.(b) (Q3): (complete the method)
+        subExpLeft.flipMinMax();
+        subExpRight.flipMinMax();
 
 
     }
