@@ -4,10 +4,16 @@
       "path": "java"
     },
     {
+      "path": "c"
+    },
+    {
       "path": "ada"
     },
     {
       "path": "haskell"
+    },
+    {
+      "path": "python"
     },
     {
       "path": "lisp"
