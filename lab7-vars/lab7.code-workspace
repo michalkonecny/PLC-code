@@ -1,0 +1,17 @@
+{
+	"folders": [
+    {
+      "path": "java"
+    },
+    {
+      "path": "ada"
+    },
+    {
+      "path": "haskell"
+    },
+    {
+      "path": "lisp"
+    }
+	],
+	"settings": {}
+}

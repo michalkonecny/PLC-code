@@ -1,0 +1,14 @@
+name:                lab7-haskell
+version:             0.1.0.0
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable lab7-haskell-vars
+  hs-source-dirs:      .
+  main-is:             vars.hs
+  build-depends:       base
+
+executable lab7-haskell-accomRoomSize
+  hs-source-dirs:      .
+  main-is:             accomRoomSize.hs
+  build-depends:       base
