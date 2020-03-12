@@ -1,12 +1,5 @@
-import java.util.Collections;
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-
 public class Vars
 {
-
 
     private static class A { public int a_c; }
     private static class B extends A { public int b_c; }
