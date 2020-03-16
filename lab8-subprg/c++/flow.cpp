@@ -22,7 +22,7 @@ int adjustDistance(float &flow1, float &flow2)
             // reduce the smaller value to 1/3 of original value:
             flow2 = flow2 / 3;
             // compensate by increasing the larger value:
-            flow1 = flow1 + flow2; 
+            flow1 = flow1 + flow2;
             flow1 = flow1 + flow2;
         }
         else
@@ -44,7 +44,7 @@ void printF1F2F3(float f1, float f2, float f3)
 int main(int argc, char** argv)
 {
     float f1, f2, f3;
-    f1 = 3; f2 = 5; f3 = 3;
+    f1 = 3; f2 = 3; f3 = 4;
     
     printF1F2F3(f1,f2,f3);
     adjustDistance(f2,f3);

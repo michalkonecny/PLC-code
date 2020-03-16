@@ -48,7 +48,7 @@ public class Flow
     public static void main(String[] args)
     {
         float f1, f2, f3;
-        f1 = 3; f2 = 5; f3 = 3;
+        f1 = 3; f2 = 3; f3 = 4;
         
         System.out.println(formatF1F2F3(f1,f2,f3));
 
