@@ -10,21 +10,21 @@ public class Reftrans
 
     public static void main(String[] args)
     {
-        IntHolder a;
+        IntHolder h;
 
         // create an int holder:
-        a = new IntHolder(1);
+        h = new IntHolder(1);
 
         int result1 =
-          (a.i++) + a.i;  // not referentially transparent
+          (h.i++) + h.i;  // not referentially transparent
         // TASK 8.2 (a): rewrite the above 2 lines using referentially transparent expressions
 
         // create exactly the same int holder as before:
-        a = new IntHolder(1);
+        h = new IntHolder(1);
 
         // like above but swapped the order of addition:
         int result2 =
-          a.i + (a.i++);  // not referentially transparent
+          h.i + (h.i++);  // not referentially transparent
         // TASK 8.2 (a): rewrite the above 2 lines using referentially transparent expressions
 
         System.out.println("result1 = " + result1);

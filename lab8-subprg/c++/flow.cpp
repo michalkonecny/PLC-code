@@ -44,12 +44,12 @@ void printF1F2F3(float f1, float f2, float f3)
 int main(int argc, char** argv)
 {
     float f1, f2, f3;
-    f1 = 3; f2 = 3; f3 = 3;
+    f1 = 3; f2 = 5; f3 = 3;
     
     printF1F2F3(f1,f2,f3);
-    adjustDistance(f1,f2);
-    printF1F2F3(f1,f2,f3);
     adjustDistance(f2,f3);
+    printF1F2F3(f1,f2,f3);
+    adjustDistance(f1,f2);
     printF1F2F3(f1,f2,f3);
     adjustDistance(f3,f3); // this does not look right...what happens exactly?
     printF1F2F3(f1,f2,f3);

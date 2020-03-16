@@ -24,10 +24,10 @@ public class Flow
         }
 
         //      This method adjustDistance behaves like
-        //      the procedure AdjustDistance in flow.adb.
+        //      the function adjustDistance in flow.cpp.
         public void adjustDistance()
         {
-            if ( Math.abs(flow1 - flow2) < 5 )
+            if ( Math.abs(flow1 - flow2) < 10 )
             {
                 if(flow1 > flow2)
                 {
@@ -48,10 +48,10 @@ public class Flow
     public static void main(String[] args)
     {
         float f1, f2, f3;
-        f1 = 3; f2 = 3; f3 = 3;
+        f1 = 3; f2 = 5; f3 = 3;
         
         System.out.println(formatF1F2F3(f1,f2,f3));
-        
+
         // 8.3.(c) TASK:
         //    Write code that is analogous to
         //    lines 50-55 in flow.cpp except
