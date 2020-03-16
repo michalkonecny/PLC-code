@@ -56,6 +56,6 @@ public class Flow
         //    Write code that is analogous to
         //    lines 50-55 in flow.cpp except
         //    that it simulates *copy-in copy-out* passing
-        //    of parameters f1 and f2 to method adjustDistance.
+        //    of formal parameters flow1 and flow2 to method adjustDistance.
     }
 }
