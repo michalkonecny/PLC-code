@@ -1,0 +1,21 @@
+name:                lab9-haskell
+version:             0.1.0.0
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable lab9-haskell-StartStop0
+  hs-source-dirs:      .
+  main-is:             StartStop0.hs
+  build-depends:       base, stm
+
+executable lab9-haskell-StartStop
+  hs-source-dirs:      .
+  main-is:             StartStop.hs
+  build-depends:       base, stm
+
+executable lab9-haskell-Bubble
+  hs-source-dirs:      .
+  main-is:             Bubble.hs
+  build-depends:       base, stm
+
+
