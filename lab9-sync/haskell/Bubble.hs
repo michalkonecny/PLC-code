@@ -116,3 +116,4 @@ waitUntilSorted stateTV =
         let (State a b c d printing) = state
         -- check whether sorted and block if not yet:
         -- *** TASK 9.2.(e) ***
+        pure () -- remove this line, replace with task solution
