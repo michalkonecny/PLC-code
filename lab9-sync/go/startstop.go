@@ -1,26 +1,28 @@
 package main
 
-import "fmt"
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
 	printerMessages := make(chan string)
-	go printer(printerMessages)
 	go switcher(printerMessages)
-	time.Sleep(10*time.Second)
+	go printer(printerMessages)
+	time.Sleep(10 * time.Second)
 }
 
 func printer(messages chan string) {
-	i := 0;
+	i := 0
 	for {
 		select {
-			case msg := <- messages:
-				if msg == "stop" {
-					<- messages
-				}
-			case <- time.After(time.Second/5):
-				fmt.Println(i)
-				i ++
+		case msg := <-messages:
+			if msg == "stop" {
+				<-messages
+			}
+		case <-time.After(time.Second / 5):
+			fmt.Println(i)
+			i++
 		}
 	}
 }
