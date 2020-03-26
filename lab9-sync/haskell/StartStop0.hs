@@ -9,7 +9,7 @@ main :: IO ()
 main =
     do
     putStrLn "main starting"
-    forkIO $ printNumbers 0
+    forkIO $ printNumbersFrom 0
     forkIO $ switchOnOff RUNNING
     threadDelay $ run_duration * second
     putStrLn "main finishing"
@@ -18,15 +18,15 @@ main =
 run_duration = 10 -- seconds
 second = 1000000 -- microseconds
 
-printNumbers :: Int -> IO ()
-printNumbers n =
+printNumbersFrom :: Int -> IO ()
+printNumbersFrom n =
     do
     -- print current number:
     putStrLn $ show n
     -- wait for 0.2 seconds:
     threadDelay $ second `div` 5 -- integer division
     -- call itself for the next number:
-    printNumbers (n + 1)
+    printNumbersFrom (n + 1)
 
 switchOnOff :: State -> IO ()
 switchOnOff state =

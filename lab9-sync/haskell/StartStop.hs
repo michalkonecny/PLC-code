@@ -8,7 +8,7 @@ main =
     do
     putStrLn "main starting"
     stateTV <- atomically $ newTVar initState
-    forkIO $ printNumbers 0 stateTV
+    forkIO $ printNumbersFrom 0 stateTV
     forkIO $ switchOnOff RUNNING stateTV
     threadDelay $ run_duration * second
     putStrLn "main finishing"
@@ -21,8 +21,8 @@ data State = PAUSED | RUNNING
 
 initState = RUNNING
 
-printNumbers :: Int -> TVar State -> IO ()
-printNumbers n stateTV =
+printNumbersFrom :: Int -> TVar State -> IO ()
+printNumbersFrom n stateTV =
     do
     waitTillNotPaused stateTV
     -- print current number:
@@ -30,7 +30,7 @@ printNumbers n stateTV =
     -- wait for 0.2 seconds:
     threadDelay $ second `div` 5 -- integer division
     -- call itself for the next number:
-    printNumbers (n + 1) stateTV
+    printNumbersFrom (n + 1) stateTV
 
 waitTillNotPaused :: TVar State -> IO ()
 waitTillNotPaused stateTV =
