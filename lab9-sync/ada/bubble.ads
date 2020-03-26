@@ -16,16 +16,16 @@ package Bubble is
 
         -- entries for detecting when neighbouring numbers
         -- are not in order and swapping them:
-        entry BubbleAB;
-        entry BubbleBC;
-        entry BubbleCD;
+        entry Bubble_ab;
+        entry Bubble_bc;
+        entry Bubble_cd;
     private
         procedure Print_State;
         a, b, c, d : Integer := 0;
     end State;
 
     -- tasks for swapping neighbours in State:
-    task BubbleAB;
-    task BubbleBC;
-    task BubbleCD;
+    task Bubble_ab;
+    task Bubble_bc;
+    task Bubble_cd;
 end Bubble;

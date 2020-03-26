@@ -47,47 +47,47 @@ package body Bubble is
             temp := n; n := m; m := temp;
         end Swap;
 
-        entry BubbleAB when a > b is
+        entry Bubble_ab when a > b is
         begin
             Swap(a,b);
             Print_State;
-        end BubbleAB;
+        end Bubble_ab;
 
-        entry BubbleBC when b > c is
+        entry Bubble_bc when b > c is
         begin
             Swap(b,c);
             Print_State;
-        end BubbleBC;
+        end Bubble_bc;
 
-        entry BubbleCD when c > d is
+        entry Bubble_cd when c > d is
         begin
             Swap(c,d);
             Print_State;
-        end BubbleCD;
+        end Bubble_cd;
 
     end State;
 
     -- Tasks that keep calling Bubble.. to sort the numbers asap:
-    task body BubbleAB is
+    task body Bubble_ab is
     begin
         loop
-            State.BubbleAB;
+            State.Bubble_ab;
         end loop;
-    end BubbleAB;
+    end Bubble_ab;
 
     -- Tasks that keep calling Bubble.. to sort the numbers asap:
-    task body BubbleBC is
+    task body Bubble_bc is
     begin
         loop
-            State.BubbleBC;
+            State.Bubble_bc;
         end loop;
-    end BubbleBC;
+    end Bubble_bc;
 
     -- Tasks that keep calling Bubble.. to sort the numbers asap:
-    task body BubbleCD is
+    task body Bubble_cd is
     begin
         loop
-            State.BubbleCD;
+            State.Bubble_cd;
         end loop;
-    end BubbleCD;
+    end Bubble_cd;
 end Bubble;

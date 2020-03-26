@@ -58,7 +58,7 @@ public class Bubble
         /**
          * Wait until B is smaller than A and then swap the value of A and B.
          */
-        public synchronized void bubbleAB()
+        public synchronized void bubble_ab()
         {
             /* TASK 9.2.(c) - part 1 */
 
@@ -77,7 +77,7 @@ public class Bubble
         /**
          * Wait until C is smaller than B and then swap the value of B and C.
          */
-        public synchronized void bubbleBC()
+        public synchronized void bubble_bc()
         {
             /* TASK 9.2.(c) - part 1 */
 
@@ -96,7 +96,7 @@ public class Bubble
         /**
          * Wait until D is smaller than C and then swap the value of C and D.
          */
-        public synchronized void bubbleCD()
+        public synchronized void bubble_cd()
         {
             /* TASK 9.2.(c) - part 1 */
 
@@ -131,35 +131,35 @@ public class Bubble
     private static State state = new State();
 
     /**
-     * A class of threads that periodically calls state.bubbleAB().
+     * A class of threads that periodically calls state.bubble_ab().
      */
-    private static class BubbleAB implements Runnable
+    private static class Bubble_ab implements Runnable
     {
         public void run()
         {
-            while ( true ) { state.bubbleAB(); }
+            while ( true ) { state.bubble_ab(); }
         }
     }
 
     /**
-     * A class of threads that periodically calls state.bubbleBC().
+     * A class of threads that periodically calls state.bubble_bc().
      */
-    private static class BubbleBC implements Runnable
+    private static class Bubble_bc implements Runnable
     {
         public void run()
         {
-            while ( true ) { state.bubbleBC(); }
+            while ( true ) { state.bubble_bc(); }
         }
     }
 
     /**
-     * A class of threads that periodically calls state.bubbleBC().
+     * A class of threads that periodically calls state.bubble_bc().
      */
-    private static class BubbleCD implements Runnable
+    private static class Bubble_cd implements Runnable
     {
         public void run()
         {
-            while ( true ) { state.bubbleCD(); }
+            while ( true ) { state.bubble_cd(); }
         }
     }
 
