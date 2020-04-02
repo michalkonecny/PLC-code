@@ -1,0 +1,18 @@
+{
+	"folders": [
+    {
+      "path": "java"
+    },
+    {
+      "path": "ada"
+    },
+    {
+      "path": "spark2014"
+    }
+    },
+    {
+      "path": "spark2005"
+    }
+	],
+	"settings": {}
+}
