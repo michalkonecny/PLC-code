@@ -1,7 +1,7 @@
 {-# OPTIONS_GHC -fno-warn-type-defaults  -fno-warn-missing-signatures #-}
 module Main where
 
-import System.Environment (getArgs)
+-- import System.Environment (getArgs)
 
 main =
   do
