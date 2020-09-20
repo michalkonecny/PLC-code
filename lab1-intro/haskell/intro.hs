@@ -14,7 +14,7 @@ main =
   -- putStrLn pname2 -- Couldn't match type ...; Expected type: String; Actual type: IO ()
   pname2 -- in Lisp: eval pname2
 
-  let n = 1 + 2 :: Int
+  let n = 1 + 2
   putStrLn (toString n)
 
   -- "if" has a special syntax but otherwise a typed version of Lisp's "if":
@@ -44,5 +44,5 @@ main =
 -- end of indented block, ie end of the body of function main
 
 -- define a Java-friendly synonym for better readability:
-toString :: (Show t) => t -> String
+toString :: Int -> String
 toString = show
