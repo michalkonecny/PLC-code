@@ -1,0 +1,24 @@
+name:           snake
+version:        0.1
+cabal-version:  >= 1.9.2
+build-type:     Simple
+author:         Michal Konecny
+stability:      experimental
+maintainer:     Michal Konecny <mikkonecny@gmail.com>
+tested-with:    GHC==7.10.3
+license:        BSD3
+synopsis:       2-player snake game thin server
+copyright:      (c) 2016 Michal Konecny
+Description:
+  2-player snake game thin server
+
+library
+  hs-source-dirs:  .
+  build-depends:
+    base == 4.*
+    , stm
+    , containers
+  ghc-options:     -O2 -Wall -fno-warn-orphans
+  extensions:
+  exposed-modules:
+    Snake
