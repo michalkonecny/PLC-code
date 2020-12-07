@@ -107,20 +107,20 @@ myFlat2.floor = 7
 # a heterogeneous list:
 things = [111, myHouse1, [1,2], myHouse2, "a string", myFlat1, myFlat2]
 
-allAccommodation = \
+allAccommodation_0 = \
     [] #TASK 5.3.(c)  -- replace [] by a list comprehension
+
+allAccommodation = \
+    [myHouse1, myHouse2, myFlat1, myFlat2]
 
 print("All accommodation:")
 for accom in allAccommodation:
     print(" ", accom)
 
-# empty line
-print
-
 # extract streets
 streets = \
     [accom.street for accom in allAccommodation]
-print("Accommodation streets:")
+print("\nAccommodation streets:")
 for street in streets:
     print(" ", street)
 
