@@ -16,7 +16,7 @@ procedure Food is
 
   type FoodStore is record
     numberOfFoods : Integer := 0;
-    Foods : FoodArray;
+    foods : FoodArray;
   end record;
 
   procedure AddFood(store : in out FoodStore; foodPos : FoodPosition) is
