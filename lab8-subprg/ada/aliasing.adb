@@ -78,11 +78,14 @@ begin
     Put("Using Vector: ");
     Put(A(1)); -- should be 1
     Put(B(1)); -- should be 2
-    Put(C(1)); -- should be 1+2+7 = 10 but is 1+2+(1+2) = 6
+    Put(C(1)); -- should be 1+2+7 = 10 but may be 1+2+(1+2) = 6
     Put_Line("");
     
-    
     -- now try the same with guaranteed reference parameter passing
+    A := (1,1,1);
+    B := (2,2,2);
+    C := (7,7,7);
+    
     AR := (v => A);
     BR := (v => B);
     CR := (v => C);
