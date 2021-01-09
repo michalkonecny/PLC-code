@@ -10,7 +10,7 @@ float distance(float flow1, float flow2)
 // of the two parameters if they are quite close together
 // so that they are more apart.
 // Nevertheless, the sum of the values stays the same.
-int adjustDistance(float &flow1, float &flow2)
+void adjustDistance(float &flow1, float &flow2)
 {
     float d = distance(flow1,flow2);
     
